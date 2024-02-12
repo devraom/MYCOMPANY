@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using MyCompany.Intranet.Core;
 
 namespace MyCompany.Intranet.Console
 {
@@ -7,42 +8,19 @@ namespace MyCompany.Intranet.Console
     {
         public static void Main(string[] args)
         {
-            System.Console.WriteLine("Ingrese el número de empleados a capturar: ");
-            int n = int.Parse(System.Console.ReadLine());
+            float Weight = 0;
 
-            List<Empleado> empleados = new List<Empleado>();
+            System.Console.WriteLine("Please enter the Weight");
+            Single.TryParse(System.Console.ReadLine(), out Weight);
 
-            for (int i = 0; i < n; i++)
-            {
-                Empleado oent = new Empleado();
+            var person = new Person(){weight = Weight};
 
-                System.Console.WriteLine("Empleado Número " + (i + 1));
-                System.Console.WriteLine("Nombre: ");
-                oent.nombre = System.Console.ReadLine();
-                System.Console.WriteLine("Horas: ");
-                oent.horas = int.Parse(System.Console.ReadLine());
-                empleados.Add(oent);
-                oent = null;
-            }
+            var service = new WeightService();
+            var manager = new WeightManager(service); 
 
-            foreach (Empleado empleado in empleados)
-            {
-                System.Console.WriteLine("Empleado");
-                System.Console.WriteLine("Nombre: " + empleado.nombre);
-                System.Console.WriteLine("Horas: " + empleado.horas + "hrs.");
+            var MarsWeight = manager.GetMarsWeight(person);
 
-                decimal salario = empleado.horas * 20;
-                if (empleado.horas > 40)
-                    salario += (empleado.horas - 40) * 5;
-
-                System.Console.WriteLine("Salario: $" + salario);
-            }
+            System.Console.WriteLine($"Weight on Mars {MarsWeight.marsWeight}Kg");
         }
-    }
-
-    public class Empleado
-    {
-        public string nombre { get; set; }
-        public int horas { get; set; }
     }
 }
