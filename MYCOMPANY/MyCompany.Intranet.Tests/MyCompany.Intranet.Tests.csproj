@@ -22,4 +22,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MyCompany.Intranet.Core\MyCompany.Intranet.Core.csproj" />
+  </ItemGroup>
+
 </Project>

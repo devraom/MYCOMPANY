@@ -8,19 +8,23 @@ namespace MyCompany.Intranet.Console
     {
         public static void Main(string[] args)
         {
+            float Height = 0;
             float Weight = 0;
 
             System.Console.WriteLine("Please enter the Weight");
             Single.TryParse(System.Console.ReadLine(), out Weight);
 
-            var person = new Person(){weight = Weight};
+            System.Console.WriteLine("Please enter the Height");
+            Single.TryParse(System.Console.ReadLine(), out Height);
 
-            var service = new WeightService();
-            var manager = new WeightManager(service); 
+            var person = new Person(){weight = Weight, height = Height};
 
-            var MarsWeight = manager.GetMarsWeight(person);
+            var service = new BMIService();
+            var manager = new BMIManager(service); 
 
-            System.Console.WriteLine($"Weight on Mars {MarsWeight.marsWeight}Kg");
+            var BMI = manager.GetBMI(person);
+
+            System.Console.WriteLine($"BMI {BMI.index} Type {BMI.BMIType}");
         }
     }
 }
